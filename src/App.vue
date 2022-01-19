@@ -1,7 +1,11 @@
 <template>
     <div id="app">
-        <Header />
-        <Main />
+        <Header
+
+        />
+        <Main
+
+        />
     </div>
 </template>
 
@@ -15,9 +19,17 @@ export default {
         Header,
         Main,
     },
+    data() {
+        return {
+            
+        }
+    },
+    methods: {
+
+    }
 };
 </script>
 
 <style lang="scss">
-@import './assets/scss/style.scss';
+@import "./assets/scss/partials/_commons.scss";
 </style>

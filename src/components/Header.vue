@@ -1,9 +1,13 @@
 <template>
     <header>
         <span>Boolflix</span>
-
-        <div>
-            <select></select>
+        <div class="container-form">
+            <input 
+                v-model="inputText"
+                type="text" 
+                placeholder="Search any film"
+                @keyup.enter="$emit('searchFilms', inputText)"
+            >
             <button>Search</button>
         </div>
     </header>
@@ -11,22 +15,18 @@
 
 <script>
 export default {
-    name: 'Header'
+    name: 'Header',
+    data() {
+        return {
+            inputText: '',
+        }
+    },
+    props: {
+        
+    }
 }
 </script>
 
 <style scoped lang="scss">
-@import "../assets/scss/partials/_mixins.scss";
-
-header {
-    @include flex(row, $justify: space-between, $align: center, $wrap: false, $gap: 0);
-    height: 70px;
-    background-color: rgb(0, 0, 0);
-    padding: 0 20px;
-    span {
-        font-size: 1.2em;
-        text-transform: uppercase;
-        color: rgb(255, 0, 0);
-    }
-}
+@import "../assets/scss/partials/_header.scss";
 </style>
