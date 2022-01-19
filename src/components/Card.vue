@@ -4,6 +4,7 @@
         @mouseover="showInfo = true" 
         @mouseleave="showInfo = false"
     >
+        <img src="https://picsum.photos/198/298"> <!-- es. foto -->
         <ul v-show="showInfo">
             <li><span>Titolo: </span> {{ title }}</li>
             <li><span>Titolo originale: </span>{{ originalTitle }}</li>

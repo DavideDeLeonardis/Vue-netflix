@@ -1,7 +1,7 @@
 @import "./_mixins.scss";
 
 main {
-    @include flex(row, $justify: center, $align: initial, $wrap: true, $gap: 50px);
-    width: 95%;
-    margin: 1.5em auto;
+    @include flex(row, $justify: flex-start, $align: initial, $wrap: true, $gap: 50px);
+    width: 90%;
+    margin: 0 auto;
 }

@@ -3,13 +3,13 @@
     height: 300px;
     font-size: 0.8em;
     color: rgb(255, 255, 255);
-    background-color: rgb(0, 0, 0);
-    padding: 20px 0 20px 20px;
     border: 1px solid rgb(255, 255, 255);
     cursor: pointer;
     ul {
         height: 100%;
-        padding-right: 20px;
+        transform: translateY(-301px);
+        background-color: rgba(80, 80, 80, 0.849);
+        padding: 20px;
         list-style-type: none;
         overflow: scroll;
         li {
