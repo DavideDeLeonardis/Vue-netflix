@@ -1,7 +1,10 @@
 <template>
-    <div class="card">
-        <!-- <img :src="image" :alt="title"> -->
-        <ul>
+    <div 
+        class="card"
+        @mouseover="showInfo = true" 
+        @mouseleave="showInfo = false"
+    >
+        <ul v-show="showInfo">
             <li><span>Titolo: </span> {{ title }}</li>
             <li><span>Titolo originale: </span>{{ originalTitle }}</li>
             <li><span>Lingua: </span>{{ lang }}</li>
@@ -14,10 +17,12 @@
 <script>
 export default {
     name: 'Card',
+    data() {
+        return {
+            showInfo: false
+        }
+    },
     props: {
-        // image: {
-        //     type: String
-        // },
         title: {
             type: String
         },

@@ -9,7 +9,6 @@
             :vote="film.vote_average"
             :overview="film.overview"
         />
-        <!-- :image="film.poster_path" -->
     </main>
 </template>
 
