@@ -8,7 +8,7 @@
                 placeholder="Search any film"
                 @keyup.enter="$emit('searchFilms', inputText)"
             >
-            <button>Search</button>
+            <button @click="$emit('searchFilms', inputText)">Search</button>
         </div>
     </header>
 </template>
@@ -18,11 +18,8 @@ export default {
     name: 'Header',
     data() {
         return {
-            inputText: '',
+            inputText: ''
         }
-    },
-    props: {
-        
     }
 }
 </script>

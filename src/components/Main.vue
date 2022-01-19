@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Card from './Card.vue'
 
 export default {
@@ -23,31 +22,9 @@ export default {
         Card
     },
     props: {
-        
-    },
-    data() {
-        return {
-            query: 'https://api.themoviedb.org/3/search/movie?api_key=524d95d10c0a6f36e2a3d1bd584407a5&language=it-IT',
-            films: [],
-            queryFinal: 'Ritorno'  // esempio inputText
-            // queryFinal: ''
+        films: {
+            type: Array
         }
-    },
-    computed: {
-        
-    },
-    created() {
-        axios.get(this.query, {
-            params: {
-                query: this.queryFinal
-            }
-        }).
-        then(result => {
-            this.films = result.data.results
-        }).
-        catch(error => {
-            console.log(error);
-        })
     }
 }
 </script>
