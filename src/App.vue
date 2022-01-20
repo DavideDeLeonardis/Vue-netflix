@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-        <Header @searchFilms="getFilms($event)" />
-        <Main :films="films" />
+        <Header @searchCards="search($event)" />
+        <Main :cards="cards" />
     </div>
 </template>
 
@@ -19,22 +19,55 @@ export default {
     },
     data() {
         return {
+            
             query: 'https://api.themoviedb.org/3/search/',
-            films: []
+            api_key: '524d95d10c0a6f36e2a3d1bd584407a5',
+            language: 'it-IT',
+            inputText: '',
+            cards: {
+                films: [],
+                series: []
+            }
         }
     },
     methods: {
-        getFilms(value) {
+        search(value) {
+            this.inputText = value;
+            if (value != '') {
+                this.getFilms();
+                this.getSeries();
+            } else {
+                this.cards.films = [];
+                this.cards.series = [];
+            }
+        },
+        getFilms() {
             axios
                 .get(`${this.query}${'movie'}`, { 
                     params: {
-                        api_key: '524d95d10c0a6f36e2a3d1bd584407a5',
-                        language: 'it-IT',
-                        query: value
+                        api_key: this.api_key,
+                        language: this.language,
+                        query: this.inputText
                     }
                 })
                 .then(result => {
-                    this.films = result.data.results;
+                    this.cards.films = result.data.results;
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        getSeries() {
+            axios
+                .get(`${this.query}${'tv'}`, { 
+                    params: {
+                        api_key: this.api_key,
+                        language: this.language,
+                        query: this.inputText
+                    }
+                })
+                .then(result => {
+                    this.cards.series = result.data.results;
                 })
                 .catch(error => {
                     console.log(error);

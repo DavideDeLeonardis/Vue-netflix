@@ -1,17 +1,22 @@
 <template>
-    <div 
-        class="card"
-        @mouseover="showInfo = true" 
-        @mouseleave="showInfo = false"
-    >
-        <img src="https://picsum.photos/198/298"> <!-- es. foto -->
-        <ul v-show="showInfo">
-            <li><span>Titolo: </span> {{ title }}</li>
-            <li><span>Titolo originale: </span>{{ originalTitle }}</li>
-            <li><span>Lingua: </span>{{ lang }}</li>
-            <li><span>Voto: </span>{{ vote }}</li>
-            <li><span>Overview: </span>{{ overview }}</li>
-        </ul>
+    <div>
+        <div 
+            class="card"
+            @mouseover="showInfo = true" 
+            @mouseleave="showInfo = false"
+        >
+            <img 
+                :src="`https://image.tmdb.org/t/p/w342/${image}`" 
+                :alt="title ? title : name"
+            >
+            <ul v-show="showInfo">
+                <li><span>Titolo: </span>{{ title ? title : name }}</li>
+                <li><span>Titolo originale: </span>{{ originalTitle ? originalTitle : originalName }}</li>
+                <li><span>Lingua: </span>{{ lang }}</li>
+                <li><span>Voto: </span>{{ vote }}</li>
+                <li><span>Overview: </span>{{ overview }}</li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -24,10 +29,19 @@ export default {
         }
     },
     props: {
+        image: {
+            type: String
+        },
         title: {
             type: String
         },
         originalTitle: {
+            type: String
+        },
+        name: {
+            type: String
+        },
+        originalName: {
             type: String
         },
         lang: {

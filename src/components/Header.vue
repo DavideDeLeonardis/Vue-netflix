@@ -5,10 +5,10 @@
             <input 
                 v-model="inputText"
                 type="text" 
-                placeholder="Search any film"
-                @keyup.enter="$emit('searchFilms', inputText)"
+                placeholder="Search any film or serie"
+                @keyup.enter="$emit('searchCards', inputText)"
             >
-            <button @click="$emit('searchFilms', inputText)">Search</button>
+            <button @click="$emit('searchCards', inputText)">Search</button>
         </div>
     </header>
 </template>

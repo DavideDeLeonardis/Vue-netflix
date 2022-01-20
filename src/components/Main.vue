@@ -1,14 +1,38 @@
 <template>
     <main>
-        <Card
-            v-for="(film, index) in films"
-            :key="index"
-            :title="film.title"
-            :originalTitle="film.original_title"
-            :lang="film.original_language"
-            :vote="film.vote_average"
-            :overview="film.overview"
-        />
+        <div v-if="cards.films.length != 0">
+            <h1>Film</h1>
+            <div class="cards">
+                <Card
+                    v-for="(film, index) in cards.films"
+                    :key="index"
+                    :image="film.poster_path"
+                    :title="film.title"
+                    :originalTitle="film.original_title"
+                    :lang="film.original_language"
+                    :vote="film.vote_average"
+                    :overview="film.overview"
+                />
+            </div>
+        </div>
+        <div v-else class="else">Nessun film trovato</div>
+
+        <div v-if="cards.series.length != 0">
+            <h1>Serie</h1>
+            <div class="cards">
+                <Card
+                    v-for="(serie, index) in cards.series"
+                    :key="index"
+                    :image="serie.poster_path"
+                    :name="serie.name"
+                    :originalName="serie.original_name"
+                    :lang="serie.original_language"
+                    :vote="serie.vote_average"
+                    :overview="serie.overview"
+                />
+            </div>
+        </div>
+        <div v-else class="else">Nessuna serie trovata</div>
     </main>
 </template>
 
@@ -21,8 +45,11 @@ export default {
         Card
     },
     props: {
-        films: {
-            type: Array
+        cards: {
+            type: Object,
+            default() {
+                return [];
+            }
         }
     }
 }
