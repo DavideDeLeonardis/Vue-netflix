@@ -5,13 +5,19 @@
             @mouseover="showInfo = true" 
             @mouseleave="showInfo = false"
         >
-            <img 
+            <img v-if="image"
                 :src="`https://image.tmdb.org/t/p/w342/${image}`" 
                 :alt="title ? title : name"
             >
+            <div v-else class="else">
+                <div><span>Titolo: <br></span>{{ title ? title : name }}</div>
+                IMMAGINE NON DISPONIBILE
+            </div>
             <ul v-show="showInfo">
                 <li><span>Titolo: </span>{{ title ? title : name }}</li>
-                <li><span>Titolo originale: </span>{{ originalTitle ? originalTitle : originalName }}</li>
+                <li v-show="title != originalTitle || name != originalName">
+                    <span>Titolo originale: </span>{{ originalTitle ? originalTitle : originalName }}
+                </li>
                 <li><span>Lingua: </span>{{ lang }}</li>
                 <li><span>Voto: </span>{{ vote }}</li>
                 <li><span>Overview: </span>{{ overview }}</li>

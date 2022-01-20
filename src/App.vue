@@ -34,48 +34,14 @@ export default {
         search(value) {
             this.inputText = value;
             if (value != '') {
-                // this.getFilms();
-                // this.getSeries();
-                this.getCards('movie', films);
-                this.getCards('tv', series);
+                this.getCards('movie', 'films');
+                this.getCards('tv', 'series');
 
             } else {
                 this.cards.films = [];
                 this.cards.series = [];
             }
         },
-        // getFilms() {
-        //     axios
-        //         .get(`${this.query}${'movie'}`, { 
-        //             params: {
-        //                 api_key: this.api_key,
-        //                 language: this.language,
-        //                 query: this.inputText
-        //             }
-        //         })
-        //         .then(result => {
-        //             this.cards.films = result.data.results;
-        //         })
-        //         .catch(error => {
-        //             console.log(error);
-        //         })
-        // },
-        // getSeries() {
-        //     axios
-        //         .get(`${this.query}${'tv'}`, { 
-        //             params: {
-        //                 api_key: this.api_key,
-        //                 language: this.language,
-        //                 query: this.inputText
-        //             }
-        //         })
-        //         .then(result => {
-        //             this.cards.series = result.data.results;
-        //         })
-        //         .catch(error => {
-        //             console.log(error);
-        //         })
-        // },
         getCards(endPoint, array) {
             axios
                 .get(`${this.query}${endPoint}`, { 
@@ -86,7 +52,10 @@ export default {
                     }
                 })
                 .then(result => {
-                    `${this.cards}.${array}` = result.data.results;
+                    if(array == 'films')
+                        this.cards.films = result.data.results;
+                    else 
+                        this.cards.series = result.data.results;
                 })
                 .catch(error => {
                     console.log(error);
