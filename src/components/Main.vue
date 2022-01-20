@@ -46,10 +46,7 @@ export default {
     },
     props: {
         cards: {
-            type: Object,
-            default() {
-                return [];
-            }
+            type: Object
         }
     }
 }

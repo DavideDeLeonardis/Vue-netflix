@@ -4,14 +4,17 @@ main {
     width: 90%;
     color: rgb(255, 255, 255);
     margin: 0 auto;
+    
     .cards {
-        @include flex(row, $justify: flex-start, $align: initial, $wrap: true, $gap: 50px);
+        @include flex(row, $justify: flex-start, $align: initial, $gap: 50px, $wrap: true);
         margin-bottom: 50px;
     }
+    
     h1, 
     .else {
         margin-bottom: 15px;
     }
+    
     .else {
         font-size: 1.5em;
     }

@@ -1,15 +1,12 @@
 <template>
     <header>
         <span>Boolflix</span>
-        <div class="container-form">
-            <input 
-                v-model="inputText"
-                type="text" 
-                placeholder="Search any film or serie"
-                @keyup.enter="$emit('searchCards', inputText)"
-            >
-            <button @click="$emit('searchCards', inputText)">Search</button>
-        </div>
+        <input 
+            v-model="inputText"
+            type="text" 
+            placeholder="Search any film or serie"
+            @keyup="$emit('searchCards', inputText)"
+        >
     </header>
 </template>
 
