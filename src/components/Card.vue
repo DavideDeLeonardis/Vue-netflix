@@ -10,8 +10,8 @@
                 :alt="title ? title : name"
             >
             <div v-else class="else">
-                <div><span>Titolo: <br></span>{{ title ? title : name }}</div>
                 IMMAGINE NON DISPONIBILE
+                <div><span>Titolo: </span><br>{{ title ? title : name }}</div>
             </div>
             <ul v-show="showInfo">
                 <li><span>Titolo: </span>{{ title ? title : name }}</li>
