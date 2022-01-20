@@ -36,7 +36,6 @@ export default {
             if (value != '') {
                 this.getCards('movie', 'films');
                 this.getCards('tv', 'series');
-
             } else {
                 this.cards.films = [];
                 this.cards.series = [];
@@ -52,10 +51,11 @@ export default {
                     }
                 })
                 .then(result => {
-                    if(array == 'films')
+                    if (array == 'films') {
                         this.cards.films = result.data.results;
-                    else 
+                    } else {
                         this.cards.series = result.data.results;
+                    } 
                 })
                 .catch(error => {
                     console.log(error);
