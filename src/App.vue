@@ -19,14 +19,20 @@ export default {
     },
     data() {
         return {
-            query: 'https://api.themoviedb.org/3/search/movie?api_key=524d95d10c0a6f36e2a3d1bd584407a5&language=it-IT&query=',
+            query: 'https://api.themoviedb.org/3/search/',
             films: []
         }
     },
     methods: {
         getFilms(value) {
             axios
-                .get(`${this.query}${value}`)
+                .get(`${this.query}${'movie'}`, { 
+                    params: {
+                        api_key: '524d95d10c0a6f36e2a3d1bd584407a5',
+                        language: 'it-IT',
+                        query: value
+                    }
+                })
                 .then(result => {
                     this.films = result.data.results;
                 })
