@@ -26,7 +26,7 @@
                 >
                 <p v-else>{{ list.original_language }}</p>
             </li>
-            <li><span>Voto: </span>{{ list.vote_average }}</li>
+            <li><span>Voto: </span>{{ getStars() }}</li>
             <li>
                 <span>Overview: </span>
                 <div v-if="list.overview">{{ list.overview }}</div>
@@ -61,6 +61,11 @@ export default {
                 return true;
             }
             return false;
+        }
+    },
+    methods: {
+        getStars() {
+            return Math.ceil(this.list.vote_average / 2);
         }
     }
 }
