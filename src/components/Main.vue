@@ -15,7 +15,7 @@
                 />
             </div>
         </div>
-        <div v-else class="else">Nessun film trovato</div>
+        <div v-else class="else">Nessun film corrisponde alla tua ricerca</div>
 
         <div v-if="cards.series.length != 0">
             <h1>Serie</h1>
@@ -32,7 +32,7 @@
                 />
             </div>
         </div>
-        <div v-else class="else">Nessuna serie trovata</div>
+        <div v-else class="else">Nessuna serie corrisponde alla tua ricerca</div>
     </main>
 </template>
 

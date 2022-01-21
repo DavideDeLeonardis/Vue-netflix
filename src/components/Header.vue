@@ -4,7 +4,7 @@
         <input 
             v-model="inputText"
             type="text" 
-            placeholder="Search any film or serie"
+            placeholder="Cerca"
             @keyup="$emit('searchCards', inputText)"
         >
     </header>

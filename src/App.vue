@@ -19,7 +19,6 @@ export default {
     },
     data() {
         return {
-            
             query: 'https://api.themoviedb.org/3/search/',
             api_key: '524d95d10c0a6f36e2a3d1bd584407a5',
             language: 'it-IT',
