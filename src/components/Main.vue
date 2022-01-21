@@ -5,13 +5,8 @@
             <div class="cards">
                 <Card
                     v-for="(film, index) in cards.films"
-                    :key="index"
-                    :image="film.poster_path"
-                    :title="film.title"
-                    :originalTitle="film.original_title"
-                    :lang="film.original_language"
-                    :vote="film.vote_average"
-                    :overview="film.overview"
+                    :key="`A${index}`"
+                    :list="film"
                 />
             </div>
         </div>
@@ -22,13 +17,8 @@
             <div class="cards">
                 <Card
                     v-for="(serie, index) in cards.series"
-                    :key="index"
-                    :image="serie.poster_path"
-                    :name="serie.name"
-                    :originalName="serie.original_name"
-                    :lang="serie.original_language"
-                    :vote="serie.vote_average"
-                    :overview="serie.overview"
+                    :key="`B${index}`"
+                    :list="serie"
                 />
             </div>
         </div>
