@@ -24,7 +24,7 @@
                     :src="require(`../assets/img/${lang}.png`)"
                     :alt="title ? title : name"
                 >
-                <div v-else class="language">{{ lang }}</div>
+                <p v-else>{{ lang }}</p>
             </li>
             <li><span>Voto: </span>{{ vote }}</li>
             <li>
