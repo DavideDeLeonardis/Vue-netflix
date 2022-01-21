@@ -1,10 +1,7 @@
 <template>
     <div id="app">
         <Header @searchCards="search($event)" />
-        <Main 
-            :films="cards.films"
-            :series="cards.series"
-        />
+        <Main :cards="cards" />
     </div>
 </template>
 
