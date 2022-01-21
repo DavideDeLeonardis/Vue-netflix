@@ -1,10 +1,10 @@
 <template>
     <main>
-        <div v-if="cards.films.length != 0">
+        <div v-if="films.length != 0">
             <h1>Film</h1>
             <div class="cards">
                 <Card
-                    v-for="(film, index) in cards.films"
+                    v-for="(film, index) in films"
                     :key="`A${index}`"
                     :image="film.poster_path"
                     :title="film.title"
@@ -17,11 +17,11 @@
         </div>
         <div v-else class="else">Nessun film corrisponde alla tua ricerca</div>
 
-        <div v-if="cards.series.length != 0">
+        <div v-if="series.length != 0">
             <h1>Serie</h1>
             <div class="cards">
                 <Card
-                    v-for="(serie, index) in cards.series"
+                    v-for="(serie, index) in series"
                     :key="`B${index}`"
                     :image="serie.poster_path"
                     :name="serie.name"
@@ -45,8 +45,11 @@ export default {
         Card
     },
     props: {
-        cards: {
-            type: Object
+        films: {
+            type: Array,
+        },
+        series: {
+            type: Array,
         }
     }
 }
