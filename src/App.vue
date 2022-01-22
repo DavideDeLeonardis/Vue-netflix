@@ -1,8 +1,10 @@
 <template>
     <div id="app">
-        <Header @searchCards="search($event)" />
-        <Main :cards="cards"
+        <Header @search="search($event)" />
+        <Main 
             :inputText="inputText"
+            :cards="cards"
+            :populars="populars"
         />
     </div>
 </template>
@@ -21,7 +23,7 @@ export default {
     },
     data() {
         return {
-            query: 'https://api.themoviedb.org/3/search/',
+            query: 'https://api.themoviedb.org/3/',
             api_key: '524d95d10c0a6f36e2a3d1bd584407a5',
             language: 'it-IT',
             inputText: '',
@@ -29,9 +31,9 @@ export default {
                 films: null,
                 series: null
             },
-            popular: {
-                films: null,
-                series: null
+            populars: {
+                films: [],
+                series: []
             }
         }
     },
@@ -39,14 +41,14 @@ export default {
         search(value) {
             this.inputText = value;
             if (value != '') {
-                this.getCards('movie', 'films');
-                this.getCards('tv', 'series');
+                this.getSearched('search/movie', 'films');
+                this.getSearched('search/tv', 'series');
             } else {
                 this.cards.films = null;
                 this.cards.series = null;
             }
         },
-        getCards(endPoint, array) {
+        getSearched(endPoint, array) {
             axios
                 .get(`${this.query}${endPoint}`, { 
                     params: {
@@ -57,15 +59,37 @@ export default {
                 })
                 .then(result => {
                     if (array == 'films') {
-                        this.cards.films = result.data.results.slice(0, 229)
+                        this.cards.films = result.data.results;
                     } else {
-                        this.cards.series = result.data.results.slice(0, 229)
+                        this.cards.series = result.data.results;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        getTrending(endPoint, array) {
+            axios
+                .get(`${this.query}${endPoint}`, { 
+                    params: {
+                        api_key: this.api_key
+                    }
+                })
+                .then(result => {
+                    if (array == 'films') {
+                        this.populars.films = result.data.results.slice(0, 9)
+                    } else {
+                        this.populars.series = result.data.results.slice(0, 9)
                     }
                 })
                 .catch(error => {
                     console.log(error);
                 })
         }
+    },
+    created() {
+        this.getTrending('trending/movie/day', 'films');
+        this.getTrending('trending/tv/day', 'series');
     }
 };
 </script>

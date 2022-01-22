@@ -13,7 +13,7 @@ main {
     
     .cards {
         @include flex(row, $justify: flex-start, $align: initial, $gap: 50px, $wrap: true);
-        margin-bottom: 50px;
+        margin-bottom: 60px;
     }
     
     h1, 

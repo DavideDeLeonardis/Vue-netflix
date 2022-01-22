@@ -5,7 +5,7 @@
             v-model="inputText"
             type="text" 
             placeholder="Cerca"
-            @keyup="$emit('searchCards', inputText)"
+            @keyup="$emit('search', inputText)"
         >
     </header>
 </template>
