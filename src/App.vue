@@ -77,9 +77,9 @@ export default {
                 })
                 .then(result => {
                     if (array == 'films') {
-                        this.populars.films = result.data.results.slice(0, 9)
+                        this.populars.films = result.data.results.slice(0, 8);
                     } else {
-                        this.populars.series = result.data.results.slice(0, 9)
+                        this.populars.series = result.data.results.slice(0, 8);
                     }
                 })
                 .catch(error => {
