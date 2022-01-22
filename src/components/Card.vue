@@ -26,7 +26,7 @@
                 >
                 <p v-else>{{ list.original_language }}</p>
             </li>
-            <li><span>Voto: </span>{{ getStars() }}</li>
+            <li><span>Voto: </span>{{ getStars() }} / 5</li>
             <li>
                 <span>Overview: </span>
                 <div v-if="list.overview">{{ list.overview }}</div>

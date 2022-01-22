@@ -47,6 +47,11 @@
         }
     }
     
+    &:hover {
+        transform: scale(1.1);
+        transition: 0.2s;
+    }
+    
     span {
         font-size: 1.2em;
         font-weight: bold;

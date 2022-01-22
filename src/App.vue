@@ -1,7 +1,9 @@
 <template>
     <div id="app">
         <Header @searchCards="search($event)" />
-        <Main :cards="cards" />
+        <Main :cards="cards"
+            :inputText="inputText"
+        />
     </div>
 </template>
 
@@ -24,8 +26,12 @@ export default {
             language: 'it-IT',
             inputText: '',
             cards: {
-                films: [],
-                series: []
+                films: null,
+                series: null
+            },
+            popular: {
+                films: null,
+                series: null
             }
         }
     },
@@ -36,8 +42,8 @@ export default {
                 this.getCards('movie', 'films');
                 this.getCards('tv', 'series');
             } else {
-                this.cards.films = [];
-                this.cards.series = [];
+                this.cards.films = null;
+                this.cards.series = null;
             }
         },
         getCards(endPoint, array) {
@@ -51,10 +57,10 @@ export default {
                 })
                 .then(result => {
                     if (array == 'films') {
-                        this.cards.films = result.data.results;
+                        this.cards.films = result.data.results.slice(0, 229)
                     } else {
-                        this.cards.series = result.data.results;
-                    } 
+                        this.cards.series = result.data.results.slice(0, 229)
+                    }
                 })
                 .catch(error => {
                     console.log(error);
