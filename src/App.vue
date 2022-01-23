@@ -41,8 +41,8 @@ export default {
         search(value) {
             this.inputText = value;
             if (value != '') {
-                this.getSearched('search/movie', 'films');
-                this.getSearched('search/tv', 'series');
+                this.getSearched('search/movie', 'filmsSearched');
+                this.getSearched('search/tv', 'seriesSearched');
             } else {
                 this.cards.films = null;
                 this.cards.series = null;
@@ -58,28 +58,19 @@ export default {
                     }
                 })
                 .then(result => {
-                    if (array == 'films') {
-                        this.cards.films = result.data.results;
-                    } else {
-                        this.cards.series = result.data.results;
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        },
-        getTrending(endPoint, array) {
-            axios
-                .get(`${this.query}${endPoint}`, { 
-                    params: {
-                        api_key: this.api_key
-                    }
-                })
-                .then(result => {
-                    if (array == 'films') {
-                        this.populars.films = result.data.results.slice(0, 8);
-                    } else {
-                        this.populars.series = result.data.results.slice(0, 8);
+                    switch (array) {
+                        case 'filmsSearched':
+                            this.cards.films = result.data.results;
+                            break;
+                        case 'seriesSearched':
+                            this.cards.series = result.data.results;
+                            break;
+                        case 'filmsPopular':
+                            this.populars.films = result.data.results.slice(0, 8);
+                            break;
+                        default:
+                            this.populars.series = result.data.results.slice(0, 8);
+                            break;
                     }
                 })
                 .catch(error => {
@@ -88,8 +79,8 @@ export default {
         }
     },
     created() {
-        this.getTrending('trending/movie/day', 'films');
-        this.getTrending('trending/tv/day', 'series');
+        this.getSearched('trending/movie/day', 'filmsPopular');
+        this.getSearched('trending/tv/day', 'seriesPopular');
     }
 };
 </script>
