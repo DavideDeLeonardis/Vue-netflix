@@ -4,7 +4,7 @@
             <div class="result">I risultati della tua ricerca per "{{ inputText }}"</div>
 
             <div v-show="cards.films">
-                <h1 v-if="cards.films.length > 0">Film</h1>
+                <h1 v-if="cards.films && cards.films.length > 0">Film</h1>
                 <div v-else class="else">Nessun film corrisponde alla tua ricerca</div>
                 <div class="cards">
                     <Card
@@ -16,7 +16,7 @@
             </div>
 
             <div v-show="cards.series">
-                <h1 v-if="cards.series.length > 0">Serie</h1>
+                <h1 v-if="cards.series && cards.series.length > 0">Serie</h1>
                 <div v-else class="else">Nessuna serie corrisponde alla tua ricerca</div>
                 <div class="cards">
                     <Card
@@ -29,7 +29,7 @@
         </div>
 
         <div v-else>
-            <h1>FILM PIÚ POPOLARI</h1>
+            <h1>FILM PIÚ VISTI OGGI</h1>
             <div class="cards">
                 <Card
                     v-for="(film, index) in populars.films"
@@ -38,7 +38,7 @@
                 />
             </div>
 
-            <h1>SERIE PIÚ POPOLARI</h1>
+            <h1>SERIE PIÚ VISTE OGGI</h1>
             <div class="cards">
                 <Card
                     v-for="(serie, index) in populars.series"
@@ -51,12 +51,17 @@
 </template>
 
 <script>
-import Card from './Card.vue'
+import Card from './Card.vue';
 
 export default {
     name: 'Main',
     components: {
         Card
+    },
+    data() {
+        return {
+            
+        }
     },
     props: {
         inputText: {

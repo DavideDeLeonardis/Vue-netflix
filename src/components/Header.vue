@@ -1,23 +1,62 @@
 <template>
     <header>
         <span>Boolflix</span>
-        <input 
-            v-model="inputText"
-            type="text" 
-            placeholder="Cerca"
-            @keyup="$emit('search', inputText)"
-        >
+        <div class="header-right">
+            <span href="#">Film</span>
+            <span href="#">Serie</span>
+            <select 
+                v-model="valueSelect"
+                @change="$emit('', valueSelect)"
+            >
+                <option disabled value="">Seleziona un genere</option>
+                <option value="all">All</option>
+                <!-- <option
+                    v-for="(genre, index) in genres"
+                    :key="`E${index}`"
+                    :value="genre"
+                >
+                    {{ genre.name }}
+                </option> -->
+            </select>
+
+            <input
+                v-show="showInputVar"
+                v-model="inputText"
+                type="text" 
+                placeholder="Cerca"
+                @keyup="$emit('search', inputText)"
+            >
+
+            <font-awesome-icon 
+                v-show="!showInputVar"
+                @click="showInputVar = true"
+                icon="search"
+            />
+        </div>
     </header>
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+library.add(faSearch);
+
 export default {
     name: 'Header',
+    components: {
+        FontAwesomeIcon
+    },
     data() {
         return {
-            inputText: ''
+            inputText: '',
+            valueSelect: '',
+            showInputVar: false
         }
-    }
+    },
+    props: {
+        
+    },
 }
 </script>
 

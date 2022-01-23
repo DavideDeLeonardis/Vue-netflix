@@ -1,8 +1,8 @@
 <template>
     <div 
         class="card"
-        @mouseover="showInfo = true" 
-        @mouseleave="showInfo = false"
+        @mouseover="showInfoVar = true" 
+        @mouseleave="showInfoVar = false"
     >
         <img v-if="list.poster_path"
             :src="`https://image.tmdb.org/t/p/w342/${list.poster_path}`" 
@@ -12,7 +12,7 @@
             IMMAGINE NON DISPONIBILE
             <div><span>Titolo: </span><br>{{ list.title ? list.title : list.name }}</div>
         </div>
-        <ul v-show="showInfo">
+        <ul v-show="showInfoVar">
             <li><span>Titolo: </span>{{ list.title ? list.title : list.name }}</li>
             <li v-show="list.title != list.original_title || list.name != list.original_name">
                 <span>Titolo originale: </span>{{ list.original_title ? list.original_title : list.original_name }}
@@ -41,7 +41,7 @@ export default {
     name: 'Card',
     data() {
         return {
-            showInfo: false,
+            showInfoVar: false,
             availableLang: [
                 'it',
                 'en',
