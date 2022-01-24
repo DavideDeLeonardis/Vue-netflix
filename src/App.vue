@@ -1,15 +1,16 @@
 <template>
     <div id="app">
         <Header
+            :genres="genresList"
             @search="search($event)" 
         />
         <Main
-            v-if="ready"
+            v-if="showMainVar"
             :inputText="inputText"
-            :cards="cards"
+            :all="all"
             :populars="populars"
         />
-        <div v-else class="else">
+        <div v-else class="elseApp">
             Boolflix is loading...<br>
             <font-awesome-icon
                 icon="circle-notch"
@@ -38,8 +39,8 @@ export default {
     },
     data() {
         return {
-            ready: false,
-            cards: {
+            showMainVar: false,
+            all: {
                 films: null,
                 series: null
             },
@@ -65,8 +66,8 @@ export default {
                 this.getSearched('search/movie', this.inputText, 'filmsSearched');
                 this.getSearched('search/tv', this.inputText, 'seriesSearched');
             } else {
-                this.cards.films = null;
-                this.cards.series = null;
+                this.all.films = null;
+                this.all.series = null;
             }
         },
         getSearched(endPoint, query, array) {
@@ -81,16 +82,42 @@ export default {
                 .then(result => {
                     switch (array) {
                         case 'filmsSearched':
-                            this.cards.films = result.data.results;
+                            this.all.films = result.data.results;
+                            this.getGenres('movie', 'films');
                             break;
                         case 'seriesSearched':
-                            this.cards.series = result.data.results;
+                            this.all.series = result.data.results;
+                            this.getGenres('tv', 'series');
                             break;
                         case 'filmsPopular':
                             this.populars.films = result.data.results.slice(0, 8);
+                            this.getGenres('movie', 'films');
                             break;
                         case 'seriesPopular':
                             this.populars.series = result.data.results.slice(0, 8);
+                            this.getGenres('tv', 'series');
+                            break;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        getGenres(endPointType, array) {
+            axios
+                .get(`${this.apiStart}genre/${endPointType}/list`, { 
+                    params: {
+                        api_key: this.api_key,
+                        language: this.language,
+                    }
+                })
+                .then(result => {
+                    switch (array) {
+                        case 'films':
+                            this.genresList.films = result.data.genres;
+                            break;
+                        case 'series':
+                            this.genresList.series = result.data.genres;
                             break;
                     }
                 })
@@ -100,10 +127,12 @@ export default {
         }
     },
     created() {
-        // Load page
+        // Loading page
         setTimeout(() => {
-            this.ready = true
+            this.showMainVar = true
         }, 1000);
+        
+        console.log(this.genresList);
 
         this.getSearched('trending/movie/day', '', 'filmsPopular');
         this.getSearched('trending/tv/day', '', 'seriesPopular');
@@ -114,7 +143,7 @@ export default {
 <style lang="scss">
 @import "./assets/scss/partials/_commons.scss";
 
-.else {
+.elseApp {
         font-size: 2em;
         text-align: center;
         color: rgb(255, 255, 255);

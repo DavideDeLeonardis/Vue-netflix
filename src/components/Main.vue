@@ -1,26 +1,26 @@
 <template>
     <main>
-        <div v-if="cards.films || cards.series">
+        <div v-if="all.films || all.series">
             <div class="result">I risultati della tua ricerca per "{{ inputText }}"</div>
 
-            <div v-show="cards.films">
-                <h1 v-if="cards.films && cards.films.length > 0">Film</h1>
+            <div v-show="all.films">
+                <h1 v-if="all.films && all.films.length > 0">Film</h1>
                 <div v-else class="else">Nessun film corrisponde alla tua ricerca</div>
                 <div class="cards">
                     <Card
-                        v-for="(film, index) in cards.films"
+                        v-for="(film, index) in all.films"
                         :key="`A${index}`"
                         :list="film"
                     />
                 </div>
             </div>
 
-            <div v-show="cards.series">
-                <h1 v-if="cards.series && cards.series.length > 0">Serie</h1>
+            <div v-show="all.series">
+                <h1 v-if="all.series && all.series.length > 0">Serie</h1>
                 <div v-else class="else">Nessuna serie corrisponde alla tua ricerca</div>
                 <div class="cards">
                     <Card
-                        v-for="(serie, index) in cards.series"
+                        v-for="(serie, index) in all.series"
                         :key="`B${index}`"
                         :list="serie"
                     />
@@ -58,16 +58,11 @@ export default {
     components: {
         Card
     },
-    data() {
-        return {
-            
-        }
-    },
     props: {
         inputText: {
             type: String
         },
-        cards: {
+        all: {
             type: Object
         },
         populars: {

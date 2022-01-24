@@ -26,7 +26,22 @@
                 >
                 <p v-else>{{ list.original_language }}</p>
             </li>
-            <li><span>Voto: </span>{{ getStars() }} / 5</li>
+            <li>
+                <span>Voto: </span>
+                <p v-if="list.vote_average">
+                    <font-awesome-icon 
+                        v-for="(star, index) in getStars()"
+                        :key="`F${index}`"
+                        :icon="['fas', 'star']"
+                    />
+                    <font-awesome-icon 
+                        v-for="(star, index) in (5 - getStars())"
+                        :key="`G${index}`"
+                        :icon="['far', 'star']"
+                    />
+                </p>
+                <div v-else>NON DISPONIBILE</div>  
+            </li>
             <li>
                 <span>Overview: </span>
                 <div v-if="list.overview">{{ list.overview }}</div>
@@ -37,8 +52,17 @@
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+library.add(fasStar, farStar);
+
 export default {
     name: 'Card',
+    components: {
+        FontAwesomeIcon
+    },
     data() {
         return {
             showInfoVar: false,

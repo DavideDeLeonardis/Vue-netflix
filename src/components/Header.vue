@@ -6,17 +6,17 @@
             <span href="#">Serie</span>
             <select 
                 v-model="valueSelect"
-                @change="$emit('', valueSelect)"
             >
                 <option disabled value="">Seleziona un genere</option>
-                <option value="all">All</option>
-                <!-- <option
-                    v-for="(genre, index) in genres"
+                <option value="all">Tutti</option>
+                <option
+                    v-for="(genre, index) in genres.films"
                     :key="`E${index}`"
                     :value="genre"
                 >
+                <!-- DA PRENDERE TUTTI I GENERI -->
                     {{ genre.name }}
-                </option> -->
+                </option>
             </select>
 
             <input
@@ -55,8 +55,10 @@ export default {
         }
     },
     props: {
-        
-    },
+        genres: {
+            type: Object
+        }
+    }
 }
 </script>
 
