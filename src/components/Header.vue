@@ -4,7 +4,7 @@
         <div class="header-right">
             <span href="#">Film</span>
             <span href="#">Serie</span>
-            <select 
+            <!-- <select 
                 v-model="valueSelect"
             >
                 <option disabled value="">Seleziona un genere</option>
@@ -14,10 +14,9 @@
                     :key="`E${index}`"
                     :value="genre"
                 >
-                <!-- DA PRENDERE TUTTI I GENERI -->
                     {{ genre.name }}
                 </option>
-            </select>
+            </select> -->
 
             <input
                 v-show="showInputVar"
@@ -50,14 +49,14 @@ export default {
     data() {
         return {
             inputText: '',
-            valueSelect: '',
+            // valueSelect: '',
             showInputVar: false
         }
     },
     props: {
-        genres: {
-            type: Object
-        }
+        // genres: {
+        //     type: Object
+        // }
     }
 }
 </script>

@@ -1,15 +1,20 @@
 <template>
+
+    <!-- COMMENTI ==> SELECT NON IMPLEMENTATA -->
+    
     <div id="app">
         <Header
-            :genres="genresList"
             @search="search($event)" 
         />
+        <!-- :genres="genresList" -->
+
         <Main
             v-if="showMainVar"
             :inputText="inputText"
             :all="all"
             :populars="populars"
         />
+
         <div v-else class="elseApp">
             Boolflix is loading...<br>
             <font-awesome-icon
@@ -48,15 +53,15 @@ export default {
                 films: [],
                 series: []
             },
-            genresList: {
-                films: null,
-                series: null
-            },
+            // genresList: {
+            //     films: null,
+            //     series: null
+            // },
             apiStart: 'https://api.themoviedb.org/3/',
             api_key: '524d95d10c0a6f36e2a3d1bd584407a5',
             language: 'it-IT',
             inputText: '',
-            selectValue: ''
+            // selectValue: ''
         }
     },
     methods: {
@@ -83,19 +88,19 @@ export default {
                     switch (array) {
                         case 'filmsSearched':
                             this.all.films = result.data.results;
-                            this.getGenres('movie', 'films');
+                            // this.getGenres('movie', 'films');
                             break;
                         case 'seriesSearched':
                             this.all.series = result.data.results;
-                            this.getGenres('tv', 'series');
+                            // this.getGenres('tv', 'series');
                             break;
                         case 'filmsPopular':
                             this.populars.films = result.data.results.slice(0, 8);
-                            this.getGenres('movie', 'films');
+                            // this.getGenres('movie', 'films');
                             break;
                         case 'seriesPopular':
                             this.populars.series = result.data.results.slice(0, 8);
-                            this.getGenres('tv', 'series');
+                            // this.getGenres('tv', 'series');
                             break;
                     }
                 })
@@ -103,36 +108,34 @@ export default {
                     console.log(error);
                 })
         },
-        getGenres(endPointType, array) {
-            axios
-                .get(`${this.apiStart}genre/${endPointType}/list`, { 
-                    params: {
-                        api_key: this.api_key,
-                        language: this.language,
-                    }
-                })
-                .then(result => {
-                    switch (array) {
-                        case 'films':
-                            this.genresList.films = result.data.genres;
-                            break;
-                        case 'series':
-                            this.genresList.series = result.data.genres;
-                            break;
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        }
+        // getGenres(endPointType, array) {
+        //     axios
+        //         .get(`${this.apiStart}genre/${endPointType}/list`, { 
+        //             params: {
+        //                 api_key: this.api_key,
+        //                 language: this.language,
+        //             }
+        //         })
+        //         .then(result => {
+        //             switch (array) {
+        //                 case 'films':
+        //                     this.genresList.films = result.data.genres;
+        //                     break;
+        //                 case 'series':
+        //                     this.genresList.series = result.data.genres;
+        //                     break;
+        //             }
+        //         })
+        //         .catch(error => {
+        //             console.log(error);
+        //         })
+        // }
     },
     created() {
         // Loading page
         setTimeout(() => {
             this.showMainVar = true
         }, 1000);
-        
-        console.log(this.genresList);
 
         this.getSearched('trending/movie/day', '', 'filmsPopular');
         this.getSearched('trending/tv/day', '', 'seriesPopular');
