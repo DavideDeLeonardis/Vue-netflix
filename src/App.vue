@@ -30,17 +30,11 @@ import Main from "./components/Main.vue";
 
 import axios from 'axios';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faCircleNotch);
-
 export default {
     name: "App",
     components: {
         Header,
-        Main,
-        FontAwesomeIcon
+        Main
     },
     data() {
         return {
@@ -57,7 +51,7 @@ export default {
             //     films: null,
             //     series: null
             // },
-            apiStart: 'https://api.themoviedb.org/3/',
+            apiStart: 'https://api.themoviedb.org/3/',   // Docs: https://developers.themoviedb.org/3/
             api_key: '524d95d10c0a6f36e2a3d1bd584407a5',
             language: 'it-IT',
             inputText: '',
@@ -68,6 +62,7 @@ export default {
         search(value) {
             this.inputText = value;
             if (value != '') {
+                // Call to all movies and series only when input:text in not empty
                 this.getSearched('search/movie', this.inputText, 'filmsSearched');
                 this.getSearched('search/tv', this.inputText, 'seriesSearched');
             } else {
@@ -137,6 +132,7 @@ export default {
             this.showMainVar = true
         }, 1000);
 
+        // Call to trending movies and series in current day
         this.getSearched('trending/movie/day', '', 'filmsPopular');
         this.getSearched('trending/tv/day', '', 'seriesPopular');
     }
@@ -144,7 +140,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./assets/scss/partials/_commons.scss";
+@import "./assets/scss/_commons.scss";
 
 .elseApp {
         font-size: 2em;

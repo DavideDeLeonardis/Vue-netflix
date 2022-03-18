@@ -52,17 +52,8 @@
 </template>
 
 <script>
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(fasStar, farStar);
-
 export default {
     name: 'Card',
-    components: {
-        FontAwesomeIcon
-    },
     data() {
         return {
             showInfoVar: false,
@@ -96,5 +87,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../assets/scss/partials/_card.scss";
+@import "../assets/scss/_card.scss";
 </style>

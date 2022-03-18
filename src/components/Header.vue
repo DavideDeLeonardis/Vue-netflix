@@ -36,16 +36,8 @@
 </template>
 
 <script>
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faSearch);
-
 export default {
     name: 'Header',
-    components: {
-        FontAwesomeIcon
-    },
     data() {
         return {
             inputText: '',
@@ -62,5 +54,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../assets/scss/partials/_header.scss";
+@import "../assets/scss/_header.scss";
 </style>
