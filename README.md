@@ -1,6 +1,6 @@
 # vue-boolflix
 
-## Fully functioning Netflix clone with search bar, most seen films, series
+## Fully functioning Netflix home page clone with search bar, trending films, series
 <br>
 
 ## Project setup
