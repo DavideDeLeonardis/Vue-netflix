@@ -12,3 +12,4 @@ npm install
 ```
 npm run serve
 ```
+(genre select not finished)
