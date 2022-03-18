@@ -1,12 +1,9 @@
 <template>
-
-    <!-- COMMENTI ==> SELECT NON IMPLEMENTATA -->
-    
     <div id="app">
         <Header
             @search="search($event)" 
+            :genres="genresList"
         />
-        <!-- :genres="genresList" -->
 
         <Main
             v-if="showMainVar"
@@ -47,15 +44,14 @@ export default {
                 films: [],
                 series: []
             },
-            // genresList: {
-            //     films: null,
-            //     series: null
-            // },
+            genresList: {
+                films: null,
+                series: null
+            },
             apiStart: 'https://api.themoviedb.org/3/',   // Docs: https://developers.themoviedb.org/3/
             api_key: '524d95d10c0a6f36e2a3d1bd584407a5',
             language: 'it-IT',
             inputText: '',
-            // selectValue: ''
         }
     },
     methods: {
@@ -63,8 +59,8 @@ export default {
             this.inputText = value;
             if (value != '') {
                 // Call to all movies and series only when input:text in not empty
-                this.getSearched('search/movie', this.inputText, 'filmsSearched');
-                this.getSearched('search/tv', this.inputText, 'seriesSearched');
+                this.getSearched('search/movie', this.inputText, 'allFilms');
+                this.getSearched('search/tv', this.inputText, 'allSeries');
             } else {
                 this.all.films = null;
                 this.all.series = null;
@@ -80,22 +76,19 @@ export default {
                     }
                 })
                 .then(result => {
+                    // For each case, object this.all and object this.populars are filled
                     switch (array) {
-                        case 'filmsSearched':
+                        case 'allFilms':
                             this.all.films = result.data.results;
-                            // this.getGenres('movie', 'films');
                             break;
-                        case 'seriesSearched':
+                        case 'allSeries':
                             this.all.series = result.data.results;
-                            // this.getGenres('tv', 'series');
                             break;
                         case 'filmsPopular':
-                            this.populars.films = result.data.results.slice(0, 8);
-                            // this.getGenres('movie', 'films');
+                            this.populars.films = result.data.results.slice(0, 12); // Paginate only 12 cards per array
                             break;
                         case 'seriesPopular':
-                            this.populars.series = result.data.results.slice(0, 8);
-                            // this.getGenres('tv', 'series');
+                            this.populars.series = result.data.results.slice(0, 12); // Paginate only 12 cards per array
                             break;
                     }
                 })
@@ -103,28 +96,28 @@ export default {
                     console.log(error);
                 })
         },
-        // getGenres(endPointType, array) {
-        //     axios
-        //         .get(`${this.apiStart}genre/${endPointType}/list`, { 
-        //             params: {
-        //                 api_key: this.api_key,
-        //                 language: this.language,
-        //             }
-        //         })
-        //         .then(result => {
-        //             switch (array) {
-        //                 case 'films':
-        //                     this.genresList.films = result.data.genres;
-        //                     break;
-        //                 case 'series':
-        //                     this.genresList.series = result.data.genres;
-        //                     break;
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.log(error);
-        //         })
-        // }
+        getGenres(endPointType, array) {
+            axios
+                .get(`${this.apiStart}genre/${endPointType}/list`, { 
+                    params: {
+                        api_key: this.api_key,
+                        language: this.language,
+                    }
+                })
+                .then(result => {
+                    switch (array) {
+                        case 'films':
+                            this.genresList.films = result.data.genres;
+                            break;
+                        case 'series':
+                            this.genresList.series = result.data.genres;
+                            break;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
     },
     created() {
         // Loading page
@@ -132,7 +125,11 @@ export default {
             this.showMainVar = true
         }, 1000);
 
-        // Call to trending movies and series in current day
+        // Get movies and series' generes
+        this.getGenres('movie', 'films');
+        this.getGenres('tv', 'series');
+
+        // Get trending movies and series in current day
         this.getSearched('trending/movie/day', '', 'filmsPopular');
         this.getSearched('trending/tv/day', '', 'seriesPopular');
     }

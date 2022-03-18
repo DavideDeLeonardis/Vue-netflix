@@ -2,11 +2,7 @@
     <header>
         <span>Boolflix</span>
         <div class="header-right">
-            <span href="#">Film</span>
-            <span href="#">Serie</span>
-            <!-- <select 
-                v-model="valueSelect"
-            >
+            <select v-model="valueSelect">
                 <option disabled value="">Seleziona un genere</option>
                 <option value="all">Tutti</option>
                 <option
@@ -16,17 +12,17 @@
                 >
                     {{ genre.name }}
                 </option>
-            </select> -->
+            </select>
 
             <input
                 v-show="showInputVar"
                 v-model="inputText"
-                type="text" 
+                type="text"
                 placeholder="Cerca"
                 @keyup="$emit('search', inputText)"
-            >
+            />
 
-            <font-awesome-icon 
+            <font-awesome-icon
                 v-show="!showInputVar"
                 @click="showInputVar = true"
                 icon="search"
@@ -37,20 +33,23 @@
 
 <script>
 export default {
-    name: 'Header',
+    name: "Header",
     data() {
         return {
-            inputText: '',
-            // valueSelect: '',
-            showInputVar: false
-        }
+            inputText: "",
+            valueSelect: "",
+            showInputVar: false,
+        };
     },
     props: {
-        // genres: {
-        //     type: Object
-        // }
-    }
-}
+        genres: {
+            type: Object,
+            default() {
+                return {};
+            },
+        },
+    },
+};
 </script>
 
 <style scoped lang="scss">

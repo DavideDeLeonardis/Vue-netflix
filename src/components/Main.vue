@@ -1,11 +1,15 @@
 <template>
     <main>
         <div v-if="all.films || all.series">
-            <div class="result">I risultati della tua ricerca per "{{ inputText }}"</div>
+            <div class="result">
+                I risultati della tua ricerca per "{{ inputText }}"
+            </div>
 
             <div v-show="all.films">
                 <h1 v-if="all.films && all.films.length > 0">Film</h1>
-                <div v-else class="else">Nessun film corrisponde alla tua ricerca</div>
+                <div v-else class="else">
+                    Nessun film corrisponde alla tua ricerca
+                </div>
                 <div class="cards">
                     <Card
                         v-for="(film, index) in all.films"
@@ -17,7 +21,9 @@
 
             <div v-show="all.series">
                 <h1 v-if="all.series && all.series.length > 0">Serie</h1>
-                <div v-else class="else">Nessuna serie corrisponde alla tua ricerca</div>
+                <div v-else class="else">
+                    Nessuna serie corrisponde alla tua ricerca
+                </div>
                 <div class="cards">
                     <Card
                         v-for="(serie, index) in all.series"
@@ -51,25 +57,32 @@
 </template>
 
 <script>
-import Card from './Card.vue';
+import Card from "./Card.vue";
 
 export default {
-    name: 'Main',
+    name: "Main",
     components: {
-        Card
+        Card,
     },
     props: {
         inputText: {
-            type: String
+            type: String,
+            default: "",
         },
         all: {
-            type: Object
+            type: Object,
+            default() {
+                return {};
+            }
         },
         populars: {
-            type: Object
+            type: Object,
+            default() {
+                return {};
+            }
         }
     }
-}
+};
 </script>
 
 <style scoped lang="scss">
