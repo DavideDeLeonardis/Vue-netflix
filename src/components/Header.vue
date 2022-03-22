@@ -2,17 +2,39 @@
     <header>
         <span>Boolflix</span>
         <div class="header-right">
-            <select v-model="valueSelect">
-                <option disabled value="">Seleziona un genere</option>
-                <option value="all">Tutti</option>
-                <option
-                    v-for="(genre, index) in genres.films"
-                    :key="`E${index}`"
-                    :value="genre"
+            <div class="container-select">
+                <h4 style="color: white">Filtra FILM per genere</h4>
+                <select
+                    v-model="valueSelectFilm"
+                    @change="$emit('emitSelect', valueSelectFilm)"
                 >
-                    {{ genre.name }}
-                </option>
-            </select>
+                    <option value="tutti">Tutti</option>
+                    <option
+                        v-for="(genre, index) in genres.films"
+                        :key="`E${index}`"
+                        :value="genre"
+                    >
+                        {{ genre.name }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- <div class="container-select">
+                <h4 style="color: white">Filtra SERIE per genere</h4>
+                <select
+                    v-model="valueSelectSerie"
+                    @change="$emit('emitSelect', valueSelectSerie)"
+                >
+                    <option value="tutte">Tutte</option>
+                    <option
+                        v-for="(genre, index) in genres.series"
+                        :key="`F${index}`"
+                        :value="genre"
+                    >
+                        {{ genre.name }}
+                    </option>
+                </select>
+            </div> -->
 
             <input
                 v-show="showInputVar"
@@ -37,7 +59,8 @@ export default {
     data() {
         return {
             inputText: "",
-            valueSelect: "",
+            valueSelectFilm: "tutti",
+            valueSelectSerie: "tutte",
             showInputVar: false,
         };
     },

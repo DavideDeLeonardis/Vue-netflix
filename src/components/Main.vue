@@ -1,6 +1,6 @@
 <template>
     <main>
-        <div v-if="all.films || all.series">
+        <div v-if="inputText != ''">
             <div class="result">
                 I risultati della tua ricerca per "{{ inputText }}"
             </div>
