@@ -5,8 +5,8 @@
             <div class="container-select">
                 <h4 style="color: white">Filtra FILM per genere</h4>
                 <select
-                    v-model="valueSelectFilm"
-                    @change="$emit('emitSelectFilm', valueSelectFilm)"
+                    v-model="valueSelect.valueSelectFilm"
+                    @change="$emit('emitSelectFilm', valueSelect.valueSelectFilm)"
                 >
                     <option value="tutti">Tutti</option>
                     <option
@@ -22,8 +22,8 @@
             <div class="container-select">
                 <h4 style="color: white">Filtra SERIE per genere</h4>
                 <select
-                    v-model="valueSelectSerie"
-                    @change="$emit('emitSelectSerie', valueSelectSerie)"
+                    v-model="valueSelect.valueSelectSerie"
+                    @change="$emit('emitSelectSerie', valueSelect.valueSelectSerie)"
                 >
                     <option value="tutte">Tutte</option>
                     <option
@@ -59,12 +59,16 @@ export default {
     data() {
         return {
             inputText: "",
-            valueSelectFilm: "tutti",
-            valueSelectSerie: "tutte",
             showInputVar: false,
         };
     },
     props: {
+        valueSelect: {
+            type: Object,
+            default() {
+                return {};
+            },
+        },
         genres: {
             type: Object,
             default() {
