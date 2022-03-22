@@ -1,8 +1,5 @@
 # vue-boolflix
 
-## Fully functioning Netflix home page clone with search bar, trending films, trending series, possibility of filters per genres, hoverable cards.
-<br>
-
 ## Project setup
 ```
 npm install
@@ -12,3 +9,9 @@ npm install
 ```
 npm run serve
 ```
+<br>
+<br>
+
+### Fully functioning Netflix home page clone with search bar, trending films, trending series, possibility of filters per genres, hoverable cards.
+<br>
+<img src="./src/assets/img/vue-boolflix-img.png">
