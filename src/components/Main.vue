@@ -36,6 +36,9 @@
 
         <div v-else>
             <h1>FILM PIÚ VISTI OGGI</h1>
+            <div v-if="populars.films.length == 0" class="else">
+                Nessun risultato
+            </div>
             <div class="cards">
                 <Card
                     v-for="(film, index) in populars.films"
@@ -45,6 +48,9 @@
             </div>
 
             <h1>SERIE PIÚ VISTE OGGI</h1>
+            <div v-if="populars.series.length == 0" class="else">
+                Nessun risultato
+            </div>
             <div class="cards">
                 <Card
                     v-for="(serie, index) in populars.series"
@@ -73,15 +79,15 @@ export default {
             type: Object,
             default() {
                 return {};
-            }
+            },
         },
         populars: {
             type: Object,
             default() {
                 return {};
-            }
-        }
-    }
+            },
+        },
+    },
 };
 </script>
 

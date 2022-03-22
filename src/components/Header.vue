@@ -6,35 +6,35 @@
                 <h4 style="color: white">Filtra FILM per genere</h4>
                 <select
                     v-model="valueSelectFilm"
-                    @change="$emit('emitSelect', valueSelectFilm)"
+                    @change="$emit('emitSelectFilm', valueSelectFilm)"
                 >
                     <option value="tutti">Tutti</option>
                     <option
                         v-for="(genre, index) in genres.films"
                         :key="`E${index}`"
-                        :value="genre"
+                        :value="genre.id"
                     >
                         {{ genre.name }}
                     </option>
                 </select>
             </div>
 
-            <!-- <div class="container-select">
+            <div class="container-select">
                 <h4 style="color: white">Filtra SERIE per genere</h4>
                 <select
                     v-model="valueSelectSerie"
-                    @change="$emit('emitSelect', valueSelectSerie)"
+                    @change="$emit('emitSelectSerie', valueSelectSerie)"
                 >
                     <option value="tutte">Tutte</option>
                     <option
                         v-for="(genre, index) in genres.series"
                         :key="`F${index}`"
-                        :value="genre"
+                        :value="genre.id"
                     >
                         {{ genre.name }}
                     </option>
                 </select>
-            </div> -->
+            </div>
 
             <input
                 v-show="showInputVar"
