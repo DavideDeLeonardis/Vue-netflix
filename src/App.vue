@@ -2,11 +2,12 @@
     <div id="app">
         <Header
             :genres="genresList"
-            @emitSelectFilm="selectGenreFilms($event)"
-            @emitSelectSerie="selectGenreSeries($event)"
             :valueSelect="valueSelect"
+            @emitSelectGenres="selectGenres($event)"
             @search="search($event)"
         />
+            <!-- @emitSelectFilm="selectGenreFilms($event)" -->
+            <!-- @emitSelectSerie="selectGenreSeries($event)" -->
 
         <Main
             v-if="showMainVar"
@@ -91,13 +92,66 @@ export default {
                     console.log(error);
                 });
         },
-        selectGenreFilms(valueSelectFilm) {
+        // selectGenreFilms(valueSelectFilm) {
+        //     this.valueSelect.valueSelectFilm = valueSelectFilm;
+        //     if (this.valueSelect.valueSelectFilm === "tutti") {
+        //         // Display allFiltered and popularsFiltered films
+        //         this.allFiltered.films = this.all.films;
+        //         this.popularsFiltered.films = this.populars.films;
+        //     } else {
+        //         // Filter films with genre_id == valueSelectFilm
+        //         this.allFiltered.films = this.all.films.filter(film => {
+        //             return film.genre_ids.includes(this.valueSelect.valueSelectFilm);
+        //         });
+        //         this.popularsFiltered.films = this.populars.films.filter(film => {
+        //             return film.genre_ids.includes(this.valueSelect.valueSelectFilm);
+        //         });
+        //     }
+        // },
+        // selectGenreSeries(valueSelectSerie) {
+        //     this.valueSelect.valueSelectSerie = valueSelectSerie;
+        //     if (this.valueSelect.valueSelectSerie === "tutte") {
+        //         // Display allFiltered and popularsFiltered series
+        //         this.allFiltered.series = this.all.series;
+        //         this.popularsFiltered.series = this.populars.series;
+        //     } else {
+        //         // Filter series with genre_id == valueSelectSerie
+        //         this.allFiltered.series = this.all.series.filter(serie => {
+        //             return serie.genre_ids.includes(this.valueSelect.valueSelectSerie);
+        //         });
+        //         this.popularsFiltered.series = this.populars.series.filter(serie => {
+        //             return serie.genre_ids.includes(this.valueSelect.valueSelectSerie);
+        //         });
+        //     }
+        // },
+        selectGenres(valueSelect) {
+                // destructuring
+            let { valueSelectFilm, valueSelectSerie } = valueSelect;
             this.valueSelect.valueSelectFilm = valueSelectFilm;
-            if (this.valueSelect.valueSelectFilm === "tutti") {
+            this.valueSelect.valueSelectSerie = valueSelectSerie;
+
+            if (valueSelect.valueSelectFilm === "tutti" && valueSelect.valueSelectSerie === "tutte") {
+                // Display allFiltered and popularsFiltered films and series
+                this.allFiltered.films = this.all.films;
+                this.allFiltered.series = this.all.series;
+                this.popularsFiltered.films = this.populars.films;
+                this.popularsFiltered.series = this.populars.series;
+
+            } 
+            else if (valueSelect.valueSelectFilm === "tutti" && valueSelect.valueSelectSerie !== "tutte") {
                 // Display allFiltered and popularsFiltered films
                 this.allFiltered.films = this.all.films;
                 this.popularsFiltered.films = this.populars.films;
-            } else {
+
+                // Filter series with genre_id == valueSelectSerie
+                this.allFiltered.series = this.all.series.filter(serie => {
+                    return serie.genre_ids.includes(this.valueSelect.valueSelectSerie);
+                });
+                this.popularsFiltered.series = this.populars.series.filter(serie => {
+                    return serie.genre_ids.includes(this.valueSelect.valueSelectSerie);
+                });
+            } 
+            else if (valueSelect.valueSelectFilm !== "tutti" && valueSelect.valueSelectSerie === "tutte") {
                 // Filter films with genre_id == valueSelectFilm
                 this.allFiltered.films = this.all.films.filter(film => {
                     return film.genre_ids.includes(this.valueSelect.valueSelectFilm);
@@ -105,15 +159,19 @@ export default {
                 this.popularsFiltered.films = this.populars.films.filter(film => {
                     return film.genre_ids.includes(this.valueSelect.valueSelectFilm);
                 });
-            }
-        },
-        selectGenreSeries(valueSelectSerie) {
-            this.valueSelect.valueSelectSerie = valueSelectSerie;
-            if (this.valueSelect.valueSelectSerie === "tutte") {
+
                 // Display allFiltered and popularsFiltered series
                 this.allFiltered.series = this.all.series;
                 this.popularsFiltered.series = this.populars.series;
-            } else {
+            } else if (valueSelect.valueSelectFilm !== "tutti" && valueSelect.valueSelectSerie !== "tutte") {
+                // Filter films with genre_id == valueSelectFilm
+                this.allFiltered.films = this.all.films.filter(film => {
+                    return film.genre_ids.includes(this.valueSelect.valueSelectFilm);
+                });
+                this.popularsFiltered.films = this.populars.films.filter(film => {
+                    return film.genre_ids.includes(this.valueSelect.valueSelectFilm);
+                });
+
                 // Filter series with genre_id == valueSelectSerie
                 this.allFiltered.series = this.all.series.filter(serie => {
                     return serie.genre_ids.includes(this.valueSelect.valueSelectSerie);
@@ -122,6 +180,7 @@ export default {
                     return serie.genre_ids.includes(this.valueSelect.valueSelectSerie);
                 });
             }
+
         },
         getSearched(endPoint, query, array) {
             axios
@@ -181,10 +240,14 @@ export default {
                 // Reset filters
                 this.valueSelect.valueSelectFilm = "tutti";
                 this.valueSelect.valueSelectSerie = "tutte";
+                // this.selectGenres(this.valueSelect);
             } else {
                 // Display all popular films and series
                 this.all.films = null;
                 this.all.series = null;
+
+                this.valueSelect.valueSelectFilm = "tutti";
+                this.valueSelect.valueSelectSerie = "tutte";
             }
         },
     },
@@ -199,8 +262,8 @@ export default {
         this.getGenres("tv", "series");
 
         // Select genres in films and series
-        this.selectGenreFilms(this.valueSelect.valueSelectFilm);
-        this.selectGenreSeries(this.valueSelect.valueSelectSerie);
+        // this.selectGenreFilms(this.valueSelect.valueSelectFilm);
+        // this.selectGenreSeries(this.valueSelect.valueSelectSerie);
 
         // Get all and filtered trending movies and series in current day
         this.getSearched("trending/movie/day", "", "allFilmsPopular");

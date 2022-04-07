@@ -6,7 +6,12 @@
                 <h4 style="color: white">Filtra FILM per genere</h4>
                 <select
                     v-model="valueSelect.valueSelectFilm"
-                    @change="$emit('emitSelectFilm', valueSelect.valueSelectFilm)"
+                    @change="
+                        $emit('emitSelectGenres', {
+                            valueSelectFilm: valueSelect.valueSelectFilm,
+                            valueSelectSerie: valueSelect.valueSelectSerie,
+                        })
+                    "
                 >
                     <option value="tutti">Tutti</option>
                     <option
@@ -23,7 +28,12 @@
                 <h4 style="color: white">Filtra SERIE per genere</h4>
                 <select
                     v-model="valueSelect.valueSelectSerie"
-                    @change="$emit('emitSelectSerie', valueSelect.valueSelectSerie)"
+                    @change="
+                        $emit('emitSelectGenres', {
+                            valueSelectFilm: valueSelect.valueSelectFilm,
+                            valueSelectSerie: valueSelect.valueSelectSerie,
+                        })
+                    "
                 >
                     <option value="tutte">Tutte</option>
                     <option
