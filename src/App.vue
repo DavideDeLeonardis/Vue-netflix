@@ -142,6 +142,12 @@ export default {
                 this.popularsFiltered.series = this.populars.series.filter(serie => {
                     return serie.genre_ids.includes(this.valueSelect.valueSelectSerie);
                 });
+            } else {
+                this.getSearched("trending/movie/day", "", "allFilmsPopular");
+                this.getSearched("trending/tv/day", "", "allSeriesPopular");
+
+                this.getSearched("trending/movie/day", "", "filmsPopularfiltered");
+                this.getSearched("trending/tv/day", "", "seriesPopularfiltered");
             }
         },
         getSearched(endPoint, query, array) {
@@ -206,7 +212,13 @@ export default {
                 // Display all popular films and series
                 this.all.films = null;
                 this.all.series = null;
+                
+                this.getSearched("trending/movie/day", "", "allFilmsPopular");
+                this.getSearched("trending/tv/day", "", "allSeriesPopular");
 
+                this.getSearched("trending/movie/day", "", "filmsPopularfiltered");
+                this.getSearched("trending/tv/day", "", "seriesPopularfiltered");
+                
                 // Reset filters
                 this.valueSelect.valueSelectFilm = "tutti";
                 this.valueSelect.valueSelectSerie = "tutte";
