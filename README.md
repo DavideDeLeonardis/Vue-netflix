@@ -17,4 +17,4 @@ npm run serve
 ```
 <br>
 <br>
-<img src="./src/assets/img/vue-boolflix-img.png">
+<img src="./src/assets/img/boolflix-home.png">
