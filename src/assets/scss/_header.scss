@@ -1,66 +1,84 @@
-@import "./_mixins.scss";
+@import './_mixins.scss';
 
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    @include flex(row, $justify: space-between, $align: center, $gap: 10px, $wrap: true);
-    width: 100%;
-    background-color: rgb(0, 0, 0);
-    padding: 1.5em 5%;
-    z-index: 999;
+   position: fixed;
+   top: 0;
+   left: 0;
+   @include flex(
+      row,
+      $justify: space-between,
+      $align: center,
+      $gap: 10px,
+      $wrap: true
+   );
+   width: 100%;
+   background-color: rgb(0, 0, 0);
+   padding: 1.5em 5%;
+   z-index: 999;
 
-    & > span {
-        font-size: clamp(40px, 5vw, 60px);
-        font-family: initial;
-        text-transform: uppercase;
-        color: rgb(255, 0, 0);
-    }
+   & > span {
+      font-size: clamp(40px, 5vw, 60px);
+      font-family: initial;
+      text-transform: uppercase;
+      color: rgb(255, 0, 0);
+   }
 
-    .header-right {
-        @include flex(row, $justify: space-between, $align: center, $gap: 2vw, $wrap: true);
+   .header-right {
+      @include flex(
+         row,
+         $justify: space-between,
+         $align: center,
+         $gap: 2vw,
+         $wrap: true
+      );
 
-        .container-select {
-            @include flex(column, $justify: center, $align: center, $gap: 5px, $wrap: true);
-        }
+      .container-select {
+         @include flex(
+            column,
+            $justify: center,
+            $align: center,
+            $gap: 5px,
+            $wrap: true
+         );
+      }
 
-        span {
-            font-size: 1.5em;
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            transition: 0.15s;
-            cursor: pointer;
-    
-            &:hover {
-                color: rgb(173, 173, 173);
-            }
-        }
-    
-        select,
-        input {
-            height: 30px;
-        }
-        
-        select {
-            width: 170px;
-            cursor: pointer;
-        }
-        
-        input {
-            width: clamp(180px, 20vw, 400px);
-            padding-left: 5px;
-            outline: none;
-        }
-    
-        .fa-search {
-            font-size: 1.8em;
-            color: white;
-            transition: 0.2s;
-            cursor: pointer;
-    
-            &:hover {
-                transform: scale(1.2);
-            }
-        }
-    }
+      span {
+         font-size: 1.5em;
+         text-decoration: none;
+         color: rgb(255, 255, 255);
+         transition: 0.15s;
+         cursor: pointer;
+
+         &:hover {
+            color: rgb(173, 173, 173);
+         }
+      }
+
+      select,
+      input {
+         height: 30px;
+      }
+
+      select {
+         width: 170px;
+         cursor: pointer;
+      }
+
+      input {
+         width: clamp(180px, 20vw, 400px);
+         padding-left: 5px;
+         outline: none;
+      }
+
+      .fa-search {
+         font-size: 1.8em;
+         color: white;
+         transition: 0.2s;
+         cursor: pointer;
+
+         &:hover {
+            transform: scale(1.2);
+         }
+      }
+   }
 }
